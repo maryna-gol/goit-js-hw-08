@@ -31,56 +31,53 @@ modalWindowEl.addEventListener('click', onControlClick);
 window.addEventListener('keydown', onControlKey);
 
 // открытие модалки
-function onOpenModalWindow(e) {
-    e.preventDefault(); // отмена перехода по ссылке
+function onOpenModalWindow(evt) {
+    evt.preventDefault(); 
 
-    if (e.target.nodeName !== 'IMG') {
+    if (evt.target.nodeName !== 'IMG') {
         return;
     };
 
     modalWindowEl.classList.add('is-open');
 
-    bigImage.src = e.target.dataset.source;
-    bigImage.alt = e.target.alt;
+    bigImage.src = evt.target.dataset.source;
+    bigImage.alt = evt.target.alt;
 };
 
 // клики на модальном окнe
-function onControlClick(e) {
-    if (e.target.dataset.action === 'prev-lightbox') {
+function onControlClick(evt) {
+    if (evt.target.dataset.action === 'prev-lightbox') {
         prevImg();
     };
 
-    if (e.target.dataset.action === 'next-lightbox') {
+    if (evt.target.dataset.action === 'next-lightbox') {
         nextImg();
     };
 
-    if (e.target.dataset.action !== 'close-lightbox' && e.target.nodeName !== 'DIV') {
+    if (evt.target.dataset.action !== 'close-lightbox' && e.target.nodeName !== 'DIV') {
         return;
     };
 
     closeModalWindow();
 };
 // управление стрелками при открытом модальном окнe
-function onControlKey(e) {
+function onControlKey(evt) {
     if (modalWindowEl.classList.value.includes('is-open')) {
-        if (e.keyCode === 27) {
-            //console.log('esc');
+        if (evt.keyCode === 27) {
             closeModalWindow();
         };
         
-        if (e.keyCode === 37) {
-            //console.log('влево');
+        if (evt.keyCode === 37) {
             prevImg();
         };
 
-        if (e.keyCode === 39) {
-            //console.log('вправо');
+        if (evt.keyCode === 39) {
             nextImg();
         };
     };    
 };
 
-// поиск элемента в списке
+
 function findCurrentElement() {
     let index;
 
@@ -90,11 +87,9 @@ function findCurrentElement() {
             break;
         }
     }
-
     return index;
 };
 
-// предыдущая картинка на модальном окнe
 function prevImg() {
     const index = findCurrentElement();
 
@@ -109,7 +104,7 @@ function prevImg() {
     };
 };
 
-// следующая картинка на модальном окнe
+
 function nextImg() {
     const index = findCurrentElement();
 
@@ -124,7 +119,6 @@ function nextImg() {
     };
 };
 
-// закрытие модального окна
 function closeModalWindow() {
     modalWindowEl.classList.remove('is-open');
     bigImage.src = '';
