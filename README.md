@@ -70,5 +70,5 @@
 - Пролистывание изображений галереи в открытом модальном окне клавишами "влево"
   и "вправо".
 
-  # Contributors
+# Contributors
 - [Maryna Goloborodko](https://github.com/maryna-gol)
